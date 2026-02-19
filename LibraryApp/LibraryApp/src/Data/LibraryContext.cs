@@ -35,6 +35,9 @@ public class LibraryContext : DbContext
         Book harryPotterAndPhilosopherStone =  new Book { Id = 5, Title = "Harry Potter and the Philosopher's Stone", Year = 1977, Pages = 223, Status = BookStatus.Available, AuthorId = 3 };
         modelBuilder.Entity<Book>().HasData(peaceAndWar, annaKarenina, crimeAndPunishment, theBrothersKaramazov, harryPotterAndPhilosopherStone);
 
+        modelBuilder.HasPostgresEnum<BookStatus>();
+
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(LibraryContext).Assembly);
 
     }
 }
