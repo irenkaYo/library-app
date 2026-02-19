@@ -16,7 +16,7 @@ public class LibraryService
     
     public void AddBook(string title, int year, int pages, int authorId)
     {
-       Book book = new Book() {Title = title, Year = year, Pages = pages, AuthorId = authorId,  Status = BookStatus.Available};
+       Book book = new Book() {Title = title, Year = year, Pages = pages, AuthorId = authorId, Status = BookStatus.Available};
         db.Books.Add(book);
         db.SaveChanges();
     }
@@ -47,16 +47,19 @@ public class LibraryService
         return book;
     }
     
-    public void TakeBook(string title)
+    public bool TakeBook(string title)
     {
         var book = GetBookByTitle(title);
+        bool isFree = false;
         if (book != null && book.Status == BookStatus.Available)
         {
             book.Status = BookStatus.Borrowed;
+            isFree = true;
             db.SaveChanges();
         }
-        else
+        if (book == null)
             throw new Exception("Book not found");
+        return isFree;
     }
 
     public void ReturnBook(string title)
@@ -75,21 +78,27 @@ public class LibraryService
     {
         var book = GetBookByTitle(title);
         if (book != null)
+        {
             db.Books.Remove(book);
+            db.SaveChanges();
+        }
         else
             throw new Exception("Book not found");
     }
     
     public void DeleteAuthor(string name)
     {
-        var author = GetAuthorByNAme(name);
+        var author = GetAuthorByName(name);
         if (author != null)
+        {
             db.Authors.Remove(author);
+            db.SaveChanges();
+        }
         else
             throw new Exception("Author not found");
     }
 
-    private Author? GetAuthorByNAme(string name)
+    private Author? GetAuthorByName(string name)
     {
         var author = db.Authors.FirstOrDefault(a => a.Name.ToLower() == name.ToLower());
         return author;
