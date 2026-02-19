@@ -42,6 +42,8 @@ public class LibraryService
     public Book? GetBookByTitle(string title)
     {
         var book = db.Books.FirstOrDefault(b => b.Title == title);
+        if (book == null)
+            throw new Exception("Book not found");
         return book;
     }
     
@@ -53,6 +55,8 @@ public class LibraryService
             book.Status = BookStatus.Borrowed;
             db.SaveChanges();
         }
+        else
+            throw new Exception("Book not found");
     }
 
     public void ReturnBook(string title)
@@ -63,6 +67,8 @@ public class LibraryService
             book.Status = BookStatus.Available;
             db.SaveChanges();
         }
+        else
+            throw new Exception("Book not found");
     }
 
     public void DeleteBook(string title)
@@ -70,6 +76,8 @@ public class LibraryService
         var book = GetBookByTitle(title);
         if (book != null)
             db.Books.Remove(book);
+        else
+            throw new Exception("Book not found");
     }
     
     public void DeleteAuthor(string name)
@@ -77,6 +85,8 @@ public class LibraryService
         var author = GetAuthorByNAme(name);
         if (author != null)
             db.Authors.Remove(author);
+        else
+            throw new Exception("Author not found");
     }
 
     private Author? GetAuthorByNAme(string name)
