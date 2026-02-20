@@ -118,8 +118,7 @@ public class LibraryService
 
     private Book ChangeBooksType(BookDto bookDto)
     {
-        BookStatus bookDtoStatus = Enum.Parse<BookStatus>(bookDto.Status);
-        Book book = new Book(bookDto.Id, bookDto.Title, bookDto.Year, bookDto.Pages, bookDtoStatus, bookDto.AuthorId);
+        Book book = new Book(bookDto);
         return book;
     }
 

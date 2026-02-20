@@ -1,5 +1,3 @@
-using LibraryApp.models.DTO;
-
 namespace LibraryApp.models;
 
 public class Author
@@ -8,5 +6,5 @@ public class Author
     public string Name { get; set; }
     public string Country { get; set; }
     public int BirthYear { get; set; }
-    public List<BookDto> Books { get; set; }
+    public List<Book> Books { get; set; }
 }

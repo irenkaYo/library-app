@@ -1,3 +1,5 @@
+using LibraryApp.models.DTO;
+
 namespace LibraryApp.models;
 
 public class Book
@@ -10,13 +12,13 @@ public class Book
     public int AuthorId { get; set; }
     public Author Author { get; set; }
 
-    public Book(int id, string title, int year, int pages, BookStatus status, int authorId)
+    public Book(BookDto bookDto)
     {
-        Id = id;
-        Title = title;
-        Year = year;
-        Pages = pages;
-        Status = status;
-        AuthorId = authorId;
+        Id = bookDto.Id;
+        Title = bookDto.Title;
+        Year = bookDto.Year;
+        Pages = bookDto.Pages;
+        Status = Enum.Parse<BookStatus>(bookDto.Status);
+        AuthorId = bookDto.AuthorId;
     }
 }
