@@ -1,4 +1,5 @@
 ﻿using LibraryApp.models;
+using LibraryApp.models.DTO;
 using LibraryApp.Services;
 class Program
 {
@@ -99,14 +100,14 @@ class Program
         Console.Write("Enter author's country: ");
         string country = Console.ReadLine();
         Console.Write("Enter author's year of birth: ");
-        int  yearOfBirth = int.Parse(Console.ReadLine());
+        int yearOfBirth = int.Parse(Console.ReadLine());
         service.AddAuthor(name, country, yearOfBirth);
     }
 
     private static void AddBook()
     {
         ShowAllAuthors();
-        var authors =  service.GetAllAuthors();
+        var authors = service.GetAllAuthors();
                 
         Console.Write("Enter author's number: ");
         int authorNumber = int.Parse(Console.ReadLine());

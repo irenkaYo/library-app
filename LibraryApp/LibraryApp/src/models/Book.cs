@@ -9,4 +9,14 @@ public class Book
     public BookStatus Status { get; set; }
     public int AuthorId { get; set; }
     public Author Author { get; set; }
+
+    public Book(int id, string title, int year, int pages, BookStatus status, int authorId)
+    {
+        Id = id;
+        Title = title;
+        Year = year;
+        Pages = pages;
+        Status = status;
+        AuthorId = authorId;
+    }
 }
